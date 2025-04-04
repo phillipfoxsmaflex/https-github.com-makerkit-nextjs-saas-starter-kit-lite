@@ -24,8 +24,8 @@ enabled = true
 file_size_limit = "50MiB"
 
 [auth]
-site_url = "http://0.0.0.0:3000"
-additional_redirect_urls = ["http://0.0.0.0:3000", "http://0.0.0.0:3000/auth/callback", "http://0.0.0.0:3000/update-password"]
+site_url = "https://YOUR_REPL_URL.replit.dev"
+additional_redirect_urls = ["https://YOUR_REPL_URL.replit.dev", "https://YOUR_REPL_URL.replit.dev/auth/callback", "https://YOUR_REPL_URL.replit.dev/update-password"]
 jwt_expiry = 3600
 enable_signup = true
 
