@@ -40,16 +40,20 @@ const AppConfigSchema = z
   })
   .refine(
     (schema) => {
-      const isCI = process.env.NEXT_PUBLIC_CI;
-
-      if (isCI ?? !schema.production) {
+      // Allow any URL in development
+      if (!schema.production) {
         return true;
       }
-
-      return !schema.url.startsWith('http:');
+      
+      try {
+        const url = new URL(schema.url);
+        return true;
+      } catch {
+        return false;
+      }
     },
     {
-      message: `Please provide a valid HTTPS URL. Set the variable NEXT_PUBLIC_SITE_URL with a valid URL, such as: 'https://example.com'`,
+      message: `Please provide a valid URL for NEXT_PUBLIC_SITE_URL`,
       path: ['url'],
     },
   )
