@@ -44,7 +44,7 @@ const AppConfigSchema = z
       if (!schema.production) {
         return true;
       }
-      
+
       try {
         const url = new URL(schema.url);
         return true;
