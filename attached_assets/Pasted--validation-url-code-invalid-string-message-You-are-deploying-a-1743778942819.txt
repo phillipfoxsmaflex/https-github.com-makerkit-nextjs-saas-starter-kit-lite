@@ -1,0 +1,29 @@
+[
+  {
+    "validation": "url",
+    "code": "invalid_string",
+    "message": "You are deploying a production build but have entered a NEXT_PUBLIC_SITE_URL variable using http instead of https. It is very likely that you have set the incorrect URL. The build will now fail to prevent you from from deploying a faulty configuration. Please provide the variable NEXT_PUBLIC_SITE_URL with a valid URL, such as: 'https://example.com'",
+    "path": [
+      "url"
+    ]
+  }
+]
+{
+"validation": "url",
+"code": "invalid_string",
+"message": "You are deploying a production build but have entered a NEXT_PUBLIC_SITE_URL variable using http instead of https. It is very likely that you have set the incorrect URL. The build will now fail to prevent you from from deploying a faulty configuration. Please provide the variable NEXT_PUBLIC_SITE_URL with a valid URL, such as: 'https://example.com'",
+"path": [
+"url"
+]
+}
+]
+at get error [as error] (file:///home/runner/workspace/apps/web/.next/server/edge/chunks/4cddf_zod_lib_index_mjs_adccd4._.js:667:31)
+at ZodEffects.parse (file:///home/runner/workspace/apps/web/.next/server/edge/chunks/4cddf_zod_lib_index_mjs_adccd4._.js:753:22)
+at [project]/apps/web/config/app.config.ts [middleware] (ecmascript) (file:///home/runner/workspace/apps/web/.next/server/edge/chunks/[root of the server]__a1110a._.js:153:35)
+at <unknown> (file:///home/runner/workspace/apps/web/.next/server/edge/chunks/edge-wrapper_b5f005.js:693:27)
+at runModuleExecutionHooks (file:///home/runner/workspace/apps/web/.next/server/edge/chunks/edge-wrapper_b5f005.js:738:9)
+at instantiateModule (file:///home/runner/workspace/apps/web/.next/server/edge/chunks/edge-wrapper_b5f005.js:691:9)
+at getOrInstantiateModuleFromParent (file:///home/runner/workspace/apps/web/.next/server/edge/chunks/edge-wrapper_b5f005.js:624:12)
+at esmImport (file:///home/runner/workspace/apps/web/.next/server/edge/chunks/edge-wrapper_b5f005.js:142:20)
+at [project]/apps/web/middleware.ts [middleware] (ecmascript) (file:///home/runner/workspace/apps/web/.next/server/edge/chunks/[root of the server]__a1110a._.js:220:142)
+at <unknown> (file:///home/runner/workspace/apps/web/.next/server/edge/chunks/edge-wrapper_b5f005.js:693:27)
