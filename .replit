@@ -18,3 +18,7 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd apps/web && pnpm run dev"
+
+[[ports]]
+localPort = 3000
+externalPort = 80
