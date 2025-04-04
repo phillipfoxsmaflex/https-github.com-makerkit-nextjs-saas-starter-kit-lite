@@ -1,0 +1,87 @@
+A tree hydrated but some attributes of the server rendered HTML didn&#x27;t match the client properties. This won&#x27;t be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch &#x60;if (typeof window !== &#x27;undefined&#x27;)&#x60;.
+- Variable input such as &#x60;Date.now()&#x60; or &#x60;Math.random()&#x60; which changes each time it&#x27;s called.
+- Date formatting in a user&#x27;s locale which doesn&#x27;t match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <Router actionQueue={{state:{...}, ...}} assetPrefix="">
+      <HistoryUpdater>
+      <RuntimeStyles>
+      <HotReload assetPrefix="">
+        <ReactDevOverlay state={{nextId:1, ...}} dispatcher={{...}}>
+          <DevRootHTTPAccessFallbackBoundary>
+            <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+              <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+                <RedirectBoundary>
+                  <RedirectErrorBoundary router={{...}}>
+                    <Head>
+                    <link>
+                    <script>
+                    <script>
+                    <script>
+                    <script>
+                    <script>
+                    <script>
+                    <script>
+                    <script>
+                    <RootLayout>
+                      <html
+                        lang="en"
++                       className="bg-background min-h-screen antialiased inter_cca1aaa4-module__HtUGRW__variable inte..."
+-                       className="bg-background min-h-screen antialiased inter_cca1aaa4-module__HtUGRW__variable dark"
+                      >
+                    ...
+          ...
+
+
+- A server/client branch &amp;#x60;if (typeof window !== &amp;#x27;undefined&amp;#x27;)&amp;#x60;.
+- Variable input such as &amp;#x60;Date.now()&amp;#x60; or &amp;#x60;Math.random()&amp;#x60; which changes each time it&amp;#x27;s called.
+- Date formatting in a user&amp;#x27;s locale which doesn&amp;#x27;t match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+...
+&lt;Router actionQueue={{state:{...}, ...}} assetPrefix=&quot;&quot;&gt;
+&lt;HistoryUpdater&gt;
+&lt;RuntimeStyles&gt;
+&lt;HotReload assetPrefix=&quot;&quot;&gt;
+&lt;ReactDevOverlay state={{nextId:1, ...}} dispatcher={{...}}&gt;
+&lt;DevRootHTTPAccessFallbackBoundary&gt;
+&lt;HTTPAccessFallbackBoundary notFound={&lt;NotAllowedRootHTTPFallbackError&gt;}&gt;
+&lt;HTTPAccessFallbackErrorBoundary pathname=&quot;/&quot; notFound={&lt;NotAllowedRootHTTPFallbackError&gt;} ...&gt;
+&lt;RedirectBoundary&gt;
+&lt;RedirectErrorBoundary router={{...}}&gt;
+&lt;Head&gt;
+&lt;link&gt;
+&lt;script&gt;
+&lt;script&gt;
+&lt;script&gt;
+&lt;script&gt;
+&lt;script&gt;
+&lt;script&gt;
+&lt;script&gt;
+&lt;script&gt;
+&lt;RootLayout&gt;
+&lt;html
+lang=&quot;en&quot;
++ className=&quot;bg-background min-h-screen antialiased inter_cca1aaa4-module__HtUGRW__variable inte...&quot;
+- className=&quot;bg-background min-h-screen antialiased inter_cca1aaa4-module__HtUGRW__variable dark&quot;
+&gt;
+...
+...
+
+at t.value (https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/__replco/static/devtools/
