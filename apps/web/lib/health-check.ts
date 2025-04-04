@@ -1,6 +1,6 @@
 
 import { getSupabaseServerClient } from '@kit/supabase/server-client';
-import { Logger } from '@kit/shared/logger';
+import { Logger } from '@shared/logger/logger';
 
 interface HealthCheckResult {
   status: 'success' | 'error';
