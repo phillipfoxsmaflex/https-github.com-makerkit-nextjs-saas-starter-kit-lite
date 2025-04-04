@@ -1,4 +1,3 @@
-
 -- Create demo user with password: Demo123456!
 INSERT INTO auth.users (
   instance_id,
@@ -25,6 +24,45 @@ INSERT INTO auth.users (
   'authenticated',
   'demo@example.com',
   '$2a$10$LTz7pqxpHl1qVqI7E6GE9O3TKJA0F9F0J5QiXI4TrRSZ7UCLmjVxK',
+  NOW(),
+  NOW(),
+  NOW(),
+  '{"provider": "email", "providers": ["email"]}',
+  '{}',
+  NOW(),
+  NOW(),
+  '',
+  '',
+  '',
+  ''
+);
+
+-- Create demo user with password 'demo12345'
+INSERT INTO auth.users (
+  instance_id,
+  id,
+  aud,
+  role,
+  email,
+  encrypted_password,
+  email_confirmed_at,
+  recovery_sent_at,
+  last_sign_in_at,
+  raw_app_meta_data,
+  raw_user_meta_data,
+  created_at,
+  updated_at,
+  confirmation_token,
+  email_change,
+  email_change_token_new,
+  recovery_token
+) VALUES (
+  '00000000-0000-0000-0000-000000000000',
+  'demonstrator',
+  'authenticated',
+  'authenticated',
+  'demo@example.com',
+  '$2a$10$PxwWw.5LqC4RfQDKmH6kA.PZWY3W.yR5hOyWqDC1ZRfBw0G2JcXnS',
   NOW(),
   NOW(),
   NOW(),
