@@ -59,7 +59,7 @@ const AppConfigSchema = z
   )
   .refine(
     (schema) => {
-      return true;
+      return schema.themeColor !== schema.themeColorDark;
     },
     {
       message: `Please provide different theme colors for light and dark themes.`,
