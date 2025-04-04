@@ -1,5 +1,5 @@
 
--- Create demo user with password: Test123456!
+-- Create demo user with password: Demo123456!
 INSERT INTO auth.users (
   instance_id,
   id,
@@ -38,6 +38,6 @@ INSERT INTO auth.users (
   ''
 );
 
--- Create demo profiles
+-- Create demo profile
 INSERT INTO public.profiles (id, email, display_name, onboarded)
 VALUES ('demo-user-id', 'demo@example.com', 'Demo User', true);
