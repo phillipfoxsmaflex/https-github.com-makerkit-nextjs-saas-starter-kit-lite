@@ -33,22 +33,18 @@ export default async function RootLayout({
 }
 
 function getClassName(theme?: string) {
-  const dark = theme === 'dark';
-  const light = !dark;
+  const isDark = theme === 'dark';
+  const classes = ['bg-background', 'min-h-screen', 'antialiased'];
+  
+  if (sans.variable) classes.push(sans.variable);
+  if (heading.variable) classes.push(heading.variable);
+  
+  // Only add theme class if explicitly set
+  if (theme && theme !== 'system') {
+    classes.push(isDark ? 'dark' : 'light');
+  }
 
-  const font = [sans.variable, heading.variable].reduce<string[]>(
-    (acc, curr) => {
-      if (acc.includes(curr)) return acc;
-
-      return [...acc, curr];
-    },
-    [],
-  );
-
-  return cn('bg-background min-h-screen antialiased', ...font, {
-    dark,
-    light,
-  });
+  return classes.join(' ');
 }
 
 async function getTheme() {
