@@ -1,80 +1,36 @@
-import i18next, { type InitOptions, i18n } from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import resourcesToBackend from 'i18next-resources-to-backend';
+import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import type { InitOptions } from 'i18next';
 
-// Keep track of the number of iterations
+const MAX_ITERATIONS = 20;
 let iteration = 0;
 
-// Maximum number of iterations
-const MAX_ITERATIONS = 20;
-
-/**
- * Initialize the i18n instance on the client.
- * @param settings - the i18n settings
- * @param resolver - a function that resolves the i18n resources
- */
-export async function initializeI18nClient(
-  settings: InitOptions,
-  resolver: (lang: string, namespace: string) => Promise<object>,
-): Promise<i18n> {
-  const loadedLanguages: string[] = [];
-  const loadedNamespaces: string[] = [];
-
-  await i18next
-    .use(
-      resourcesToBackend(async (language, namespace, callback) => {
-        const data = await resolver(language, namespace);
-
-        if (!loadedLanguages.includes(language)) {
-          loadedLanguages.push(language);
-        }
-
-        if (!loadedNamespaces.includes(namespace)) {
-          loadedNamespaces.push(namespace);
-        }
-
-        return callback(null, data);
-      }),
-    )
-    .use(LanguageDetector)
-    .use(initReactI18next)
-    .init(
-      {
+export async function initializeI18nClient(settings: InitOptions) {
+  if (!i18next.isInitialized) {
+    await i18next
+      .use(initReactI18next)
+      .init({
         ...settings,
-        detection: {
-          order: ['htmlTag', 'cookie', 'navigator'],
-          caches: ['cookie'],
-          lookupCookie: 'lang',
-        },
+        lng: settings.lng || 'en',
+        fallbackLng: 'en',
+        load: 'languageOnly',
         interpolation: {
           escapeValue: false,
         },
-      },
-      (err) => {
-        if (err) {
-          console.error('Error initializing i18n client', err);
-        }
-      },
-    );
+      });
+  }
 
-  // to avoid infinite loops, we return the i18next instance after a certain number of iterations
-  // even if the languages and namespaces are not loaded
+  const loadedLanguages = i18next.languages || [];
+  const loadedNamespaces = i18next.reportNamespaces?.getUsedNamespaces() || [];
+
   if (iteration >= MAX_ITERATIONS) {
-    console.debug(`Max iterations reached: ${MAX_ITERATIONS}`);
-
     return i18next;
   }
 
-  // keep component from rendering if no languages or namespaces are loaded
   if (loadedLanguages.length === 0 || loadedNamespaces.length === 0) {
     iteration++;
-
-    console.debug(
-      `Keeping component from rendering if no languages or namespaces are loaded. Iteration: ${iteration}. Will stop after ${MAX_ITERATIONS} iterations.`,
-    );
-
-    throw new Error('No languages or namespaces loaded');
+    await new Promise(resolve => setTimeout(resolve, 50));
+    return initializeI18nClient(settings);
   }
 
   return i18next;
