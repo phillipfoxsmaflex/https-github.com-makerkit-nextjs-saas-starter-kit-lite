@@ -28,8 +28,8 @@ function Home() {
           }
           title={
             <>
-              <span>hola mundo</span>
-              <span>for your next project</span>
+              <span>gracias por todo</span>
+              <span>thank you for everything</span>
             </>
           }
           subtitle={
