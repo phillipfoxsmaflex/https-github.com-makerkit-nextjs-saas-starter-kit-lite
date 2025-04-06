@@ -1,0 +1,82 @@
+Gracias por compartir el nuevo log — el build falló nuevamente, pero ahora el problema es con el tipo de módulo en el proyecto y cómo está interpretando Vercel tu next.config.js.
+
+⸻
+
+Error actual:
+
+ReferenceError: require is not defined in ES module scope
+This file is being treated as an ES module because it has a '.js' file extension and '/vercel/path0/apps/web/package.json' contains "type": "module".
+To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+
+
+
+⸻
+
+¿Por qué ocurre esto?
+
+Tu archivo next.config.js usa require(), lo cual solo funciona con CommonJS, pero tu package.json dentro de apps/web dice:
+
+"type": "module"
+
+Entonces Next.js intenta ejecutar next.config.js como si fuera ES Module, y por eso falla.
+
+⸻
+
+✅ Solución inmediata: cambia la extensión a .cjs
+
+Renombra el archivo de:
+
+apps/web/next.config.js
+
+a:
+
+apps/web/next.config.cjs
+
+Esto le indica explícitamente a Node y a Vercel que se trata de un archivo CommonJS, permitiendo el uso de require, __dirname, etc.
+
+⸻
+
+✅ Prompt actualizado para Replit AI Assistant
+
+Pega esto en Replit:
+
+⸻
+
+Corrige el error de Vercel que dice:
+ReferenceError: require is not defined in ES module scope
+
+Para eso:
+	1.	Renombra apps/web/next.config.js a next.config.cjs.
+	2.	Asegúrate de que el contenido siga usando require() y __dirname, como este ejemplo:
+
+const path = require('path');
+
+module.exports = {
+  webpack: (config) => {
+    config.resolve.alias['@shared'] = path.resolve(__dirname, '../../packages/shared/src');
+
+    config.ignoreWarnings = [
+      (warning) =>
+        warning.message.includes("Can't resolve") ||
+        warning.message.includes("Critical dependency")
+    ];
+
+    return config;
+  },
+};
+
+	3.	No modifiques el "type": "module" en package.json. Solo usa .cjs para evitar errores.
+
+El objetivo es que Vercel pueda interpretar correctamente el archivo de configuración y que el build se ejecute sin errores.
+
+⸻
+
+Una vez hecho, sube a GitHub:
+
+git add .
+git commit -m "Fix module scope issue by using .cjs config"
+git push origin main
+
+Y Vercel debería finalmente compilar sin fallar.
+
+¿Te gustaría que agreguemos una prueba final con curl o axios en el postbuild-check.js para validar que /api/health o la home cargan correctamente después del deploy?
