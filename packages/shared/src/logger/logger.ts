@@ -1,17 +1,17 @@
-type LogFn = {
-  <T extends object>(obj: T, msg?: string, ...args: unknown[]): void;
-  (obj: unknown, msg?: string, ...args: unknown[]): void;
-  (msg: string, ...args: unknown[]): void;
-};
 
 /**
- * @name Logger
- * @description Logger interface for logging messages
+ * Simple logger implementation
  */
 export interface Logger {
-  info: LogFn;
-  error: LogFn;
-  warn: LogFn;
-  debug: LogFn;
-  fatal: LogFn;
+  info: (...args: any[]) => void;  
+  warn: (...args: any[]) => void;
+  error: (...args: any[]) => void;
+  debug: (...args: any[]) => void;
 }
+
+export const Logger: Logger = {
+  info: (...args: any[]) => console.log('[INFO]', ...args),
+  warn: (...args: any[]) => console.warn('[WARN]', ...args), 
+  error: (...args: any[]) => console.error('[ERROR]', ...args),
+  debug: (...args: any[]) => console.debug('[DEBUG]', ...args)
+};
