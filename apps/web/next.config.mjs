@@ -12,10 +12,16 @@ const INTERNAL_PACKAGES = [
   '@kit/next',
 ];
 
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
   transpilePackages: [...INTERNAL_PACKAGES, '@shared/logger'],
+  webpack: (config) => {
+    config.resolve.alias['@shared'] = path.resolve(__dirname, '../../packages/shared/src');
+    return config;
+  },
   output: 'standalone',
   images: {
     remotePatterns: getRemotePatterns(),
