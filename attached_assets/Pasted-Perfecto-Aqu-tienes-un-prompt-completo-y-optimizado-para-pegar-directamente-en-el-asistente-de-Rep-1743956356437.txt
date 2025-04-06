@@ -1,0 +1,92 @@
+Perfecto. Aquí tienes un prompt completo y optimizado para pegar directamente en el asistente de Replit AI, que realizará todas las acciones necesarias para que Vercel despliegue correctamente, gestione errores automáticamente y garantice que la app esté funcional incluso si ocurren fallos menores.
+
+⸻
+
+Prompt para Replit AI Assistant:
+
+Estoy desplegando este proyecto monorepo de Next.js con Turborepo en Vercel y quiero evitar que errores pequeños bloqueen el despliegue.
+Por favor haz lo siguiente:
+
+1. Renombra apps/web/next.config.mjs a next.config.js y usa require() y __dirname correctamente:
+
+const path = require('path');
+
+module.exports = {
+  webpack: (config) => {
+    config.resolve.alias['@shared'] = path.resolve(__dirname, '../../packages/shared/src');
+
+    // Ignorar advertencias menores de Webpack
+    config.ignoreWarnings = [
+      (warning) =>
+        warning.message.includes("Can't resolve") ||
+        warning.message.includes("Critical dependency")
+    ];
+
+    return config;
+  },
+};
+
+2. Crea el archivo vercel.json en la raíz del proyecto con este contenido:
+
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
+}
+
+3. Crea un archivo en scripts/postbuild-check.js que valide el build:
+
+const fs = require('fs');
+const path = require('path');
+
+const outPath = path.resolve(__dirname, '../apps/web/.next');
+
+if (!fs.existsSync(outPath)) {
+  console.error('❌ Build folder not found. Something failed.');
+  process.exit(1);
+}
+
+console.log('✅ Build validated. Folder exists.');
+process.exit(0);
+
+4. Agrega el script postbuild en el package.json raíz:
+
+"scripts": {
+  "build": "turbo build --cache-dir=.turbo",
+  "postbuild": "node scripts/postbuild-check.js"
+}
+
+5. Crea una página de error en apps/web/pages/_error.tsx con este contenido:
+
+function Error({ statusCode }: { statusCode: number }) {
+  return (
+    <div style={{ padding: 40 }}>
+      <h1>Ups! Algo salió mal.</h1>
+      <p>Error: {statusCode || 500}</p>
+      <p>Estamos trabajando en ello.</p>
+    </div>
+  );
+}
+
+Error.getInitialProps = ({ res, err }) => {
+  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+  return { statusCode };
+};
+
+export default Error;
+
+Objetivo:
+
+Que el build en Vercel sea más tolerante a errores menores, no se bloquee con problemas simples de Webpack o alias, y siempre entregue una versión funcional del sitio web.
+
+⸻
+
+Después de que el asistente termine, simplemente haz:
+
+git add .
+git commit -m "Fix deploy stability and add error handling for Vercel"
+git push origin main
+
+¿Te gustaría también agregar un test automático de salud (/api/health) como parte del postbuild para saber que tu backend responde antes de considerar el build como exitoso?
