@@ -1,6 +1,7 @@
 'use client';
 
 import type { InitOptions, i18n } from 'i18next';
+import { useState, useEffect } from 'react'; // Added import for useState and useEffect
 
 import { initializeI18nClient } from './i18n.client';
 
@@ -19,6 +20,23 @@ export function I18nProvider({
   settings: InitOptions;
   resolver: Resolver;
 }>) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Wait for i18next initialization.  Note: this assumes i18next is globally available.  If not, adjust accordingly.
+    const i18next = (window as any).i18n; // Access i18next instance from the window object.  Potentially needs adjustment based on your i18n setup.
+    if(i18next){
+        i18next.on('initialized', () => {
+          setIsLoading(false);
+        });
+    }
+
+  }, []);
+
+  if (isLoading) {
+    return null;
+  }
+
   useI18nClient(settings, resolver);
 
   return children;
