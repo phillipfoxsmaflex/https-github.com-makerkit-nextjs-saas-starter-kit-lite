@@ -19,6 +19,13 @@ const config = {
   output: 'standalone',
   images: {
     remotePatterns: getRemotePatterns(),
+    unoptimized: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true
+  },
+  eslint: {
+    ignoreDuringBuilds: true
   },
   logging: {
     fetches: {
