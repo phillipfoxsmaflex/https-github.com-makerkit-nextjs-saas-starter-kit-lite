@@ -1,0 +1,13 @@
+createUnhandledError@https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/_next/static/chunks/a725e_next_dist_client_42b071._.js:689:58
+handleClientError@https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/_next/static/chunks/a725e_next_dist_client_42b071._.js:856:56
+error@https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/_next/static/chunks/a725e_next_dist_client_42b071._.js:991:56
+emitPendingHydrationWarnings@https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/_next/static/chunks/a725e_next_dist_compiled_react-dom_582ec9._.js:2768:108
+completeWork@https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/_next/static/chunks/a725e_next_dist_compiled_react-dom_582ec9._.js:7238:130
+runWithFiberInDEV@https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/_next/static/chunks/a725e_next_dist_compiled_react-dom_582ec9._.js:631:28
+completeUnitOfWork@https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/_next/static/chunks/a725e_next_dist_compiled_react-dom_582ec9._.js:8020:40
+performUnitOfWork@https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/_next/static/chunks/a725e_next_dist_compiled_react-dom_582ec9._.js:7957:46
+workLoopConcurrent@https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/_next/static/chunks/a725e_next_dist_compiled_react-dom_582ec9._.js:7951:75
+renderRootConcurrent@https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/_next/static/chunks/a725e_next_dist_compiled_react-dom_582ec9._.js:7933:89
+performWorkOnRoot@https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/_next/static/chunks/a725e_next_dist_compiled_react-dom_582ec9._.js:7565:195
+performWorkOnRootViaSchedulerTask@https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/_next/static/chunks/a725e_next_dist_compiled_react-dom_582ec9._.js:8394:26
+performWorkUntilDeadline@https://abd2d54e-bc7f-430c-8ef8-11153c4bfad4-00-33xjy6d1gezci.janeway.replit.dev/_next/static/chunks/a725e_next_dist_compiled_8fb973._.js:2353:72
