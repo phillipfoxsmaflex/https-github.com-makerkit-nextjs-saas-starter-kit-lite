@@ -12,7 +12,7 @@ const INTERNAL_PACKAGES = [
   '@kit/next',
 ];
 
-const path = require('path');
+import path from 'path';
 
 /** @type {import('next').NextConfig} */
 const config = {
