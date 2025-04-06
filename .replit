@@ -5,7 +5,8 @@ run = "npm run dev"
 channel = "stable-24_05"
 
 [deployment]
-run = ["sh", "-c", "npm run dev"]
+run = ["sh", "-c", "cd apps/web && pnpm run start"]
+build = ["sh", "-c", "cd apps/web && pnpm install && pnpm run build"]
 
 [workflows]
 runButton = "Run"

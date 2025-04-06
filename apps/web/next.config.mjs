@@ -15,8 +15,8 @@ const INTERNAL_PACKAGES = [
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
-  /** Enables hot reloading for local packages without a build step */
   transpilePackages: INTERNAL_PACKAGES,
+  output: 'standalone',
   images: {
     remotePatterns: getRemotePatterns(),
   },
@@ -25,12 +25,10 @@ const config = {
       fullUrl: true,
     },
   },
-  serverExternalPackages: [],
-  // needed for supporting dynamic imports for local content
-  outputFileTracingIncludes: {
-    '/*': ['./content/**/*'],
-  },
   experimental: {
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
     mdxRs: true,
     reactCompiler: ENABLE_REACT_COMPILER,
     turbo: {
@@ -46,14 +44,8 @@ const config = {
       ...INTERNAL_PACKAGES,
     ],
   },
-  modularizeImports: {
-    lodash: {
-      transform: 'lodash/{{member}}',
-    },
-  },
-  /** We already do linting and typechecking as separate tasks in CI */
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
+  eslint: { ignoreDuringBuilds: IS_PRODUCTION },
+  typescript: { ignoreBuildErrors: IS_PRODUCTION },
 };
 
 export default config;
@@ -64,7 +56,6 @@ function getRemotePatterns() {
 
   if (SUPABASE_URL) {
     const hostname = new URL(SUPABASE_URL).hostname;
-
     remotePatterns.push({
       protocol: 'https',
       hostname,
@@ -76,11 +67,7 @@ function getRemotePatterns() {
     : [
         {
           protocol: 'http',
-          hostname: '127.0.0.1',
-        },
-        {
-          protocol: 'http',
-          hostname: 'localhost',
+          hostname: '0.0.0.0',
         },
       ];
 }
