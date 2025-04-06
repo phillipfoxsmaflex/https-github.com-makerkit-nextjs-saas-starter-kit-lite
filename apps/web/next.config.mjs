@@ -15,7 +15,7 @@ const INTERNAL_PACKAGES = [
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
-  transpilePackages: INTERNAL_PACKAGES,
+  transpilePackages: [...INTERNAL_PACKAGES, '@shared/logger'],
   output: 'standalone',
   images: {
     remotePatterns: getRemotePatterns(),
