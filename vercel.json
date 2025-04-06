@@ -1,9 +1,5 @@
 
 {
-  "buildCommand": "pnpm run build",
-  "outputDirectory": ".next",
-  "framework": "nextjs",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
-  ]
+  "buildCommand": "pnpm build",
+  "outputDirectory": "apps/web/.next"
 }

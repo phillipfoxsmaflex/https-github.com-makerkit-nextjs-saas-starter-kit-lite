@@ -10,10 +10,6 @@ overrides:
 importers:
 
   .:
-    dependencies:
-      next:
-        specifier: 15.1.7
-        version: 15.1.7(@opentelemetry/api@1.9.0)(@playwright/test@1.50.1)(babel-plugin-react-compiler@19.0.0-beta-e993439-20250328)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
     devDependencies:
       '@manypkg/cli':
         specifier: ^0.23.0
@@ -24,6 +20,9 @@ importers:
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
+      next:
+        specifier: 15.1.7
+        version: 15.1.7(@opentelemetry/api@1.9.0)(@playwright/test@1.50.1)(babel-plugin-react-compiler@19.0.0-beta-e993439-20250328)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       prettier:
         specifier: ^3.5.1
         version: 3.5.1
